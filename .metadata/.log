@@ -72,3 +72,12 @@ END
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-22 10:34:35.645
 !MESSAGE Classpath changed for project: zupeat-api
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-22 11:04:11.320
+!MESSAGE Classpath changed for project: zupeat-api
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-22 11:04:11.505
+!MESSAGE Classpath changed for project: zupeat-api
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-22 11:04:13.284
+!MESSAGE Classpath changed for project: zupeat-api
