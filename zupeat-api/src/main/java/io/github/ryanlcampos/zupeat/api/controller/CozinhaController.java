@@ -6,9 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.repository.CozinhaRepository;
+import io.github.ryanlcampos.zupeat.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping("/cozinhas")
@@ -29,6 +31,9 @@ public class CozinhaController {
 	
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
+	
+	@Autowired
+	private CadastroCozinhaService cadastroCozinha;
 	
 	@GetMapping
 	public List<Cozinha> listar(){
@@ -39,20 +44,20 @@ public class CozinhaController {
 	public ResponseEntity<Cozinha> buscar(@PathVariable("cozinhaId") Long id) {
 		Optional<Cozinha> possivelCozinha = cozinhaRepository.findById(id);
 		
-		if(possivelCozinha.isPresent()) {
+		if(possivelCozinha.isEmpty()) {
 			
-			Cozinha cozinhaEncontrada = possivelCozinha.get();
-			
-			return ResponseEntity.ok(cozinhaEncontrada);
+			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.notFound().build();
+		Cozinha cozinhaEncontrada = possivelCozinha.get();
+		
+		return ResponseEntity.ok(cozinhaEncontrada);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return cozinhaRepository.save(cozinha);
+		return cadastroCozinha.salvar(cozinha);
 	}
 	
 	@PutMapping("/{cozinhaId}")
@@ -76,20 +81,15 @@ public class CozinhaController {
 	public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){	
 		try {
 			
-			Optional<Cozinha> possivelCozinha = cozinhaRepository.findById(cozinhaId);
-			
-			if(possivelCozinha.isEmpty()) {
-				return ResponseEntity.notFound().build();
-			}
-			
-			Cozinha cozinhaEncontrada = possivelCozinha.get();
-			
-			cozinhaRepository.delete(cozinhaEncontrada);
+			cadastroCozinha.remover(cozinhaId);
 			
 			return ResponseEntity.noContent().build();
 			
-		}catch (DataIntegrityViolationException e) {
+		}catch (EntidadeEmUsoException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			
+		}catch(EntidadeNaoEncontradaException en) {
+			return ResponseEntity.notFound().build();
 		}
 		
 	}
