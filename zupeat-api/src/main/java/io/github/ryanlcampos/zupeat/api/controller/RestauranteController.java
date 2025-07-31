@@ -31,25 +31,20 @@ public class RestauranteController {
 	@Autowired
 	private CadastroRestauranteService cadastroRestaurante;
 	
-	@Autowired
-	private RestauranteRepository restauranteRepository;
-	
 	@GetMapping
 	public List<Restaurante> listar(){
-		return restauranteRepository.findAll();
+		return cadastroRestaurante.listar();
 	}
 	
 	@GetMapping("/{restauranteId}")
 	public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId){
-		Optional<Restaurante> possivelRestaurante = restauranteRepository.findById(restauranteId);
-		
-		if(possivelRestaurante.isEmpty()) {
+		try {
+			Restaurante restauranteEncontrado = cadastroRestaurante.obterPorId(restauranteId);
+
+			return ResponseEntity.ok(restauranteEncontrado);
+		} catch (EntidadeNaoEncontradaException e){
 			return ResponseEntity.notFound().build();
 		}
-		
-		Restaurante restauranteEncontrado = possivelRestaurante.get();
-		
-		return ResponseEntity.ok(restauranteEncontrado);
 	}
 	
 	@PostMapping

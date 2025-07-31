@@ -1,5 +1,6 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class CadastroRestauranteService {
 	
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
+
+	public List<Restaurante> listar(){
+		return restauranteRepository.findAll();
+	}
 	
 	public Restaurante salvar(Restaurante restaurante) {
 		
