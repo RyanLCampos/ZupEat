@@ -2,6 +2,7 @@ package io.github.ryanlcampos.zupeat.api.controller;
 
 import java.util.List;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,6 @@ public class EstadoController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Estado adicionar(@RequestBody Estado estado){
 		return cadastroEstado.salvar(estado);
-		
 	}
 	
 	@PutMapping("/{estadoId}")
@@ -74,7 +74,7 @@ public class EstadoController {
 	}
 	
 	@DeleteMapping("/{estadoId}")
-	public ResponseEntity<Estado> remover(@PathVariable Long estadoId){
+	public ResponseEntity<?> remover(@PathVariable Long estadoId){
 		try {
 			
 			cadastroEstado.remover(estadoId);
@@ -83,6 +83,8 @@ public class EstadoController {
 			
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.notFound().build();
+		} catch (EntidadeEmUsoException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 		}
 	} 
 	
