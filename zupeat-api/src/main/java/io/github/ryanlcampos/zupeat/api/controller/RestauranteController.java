@@ -1,6 +1,9 @@
 package io.github.ryanlcampos.zupeat.api.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,12 +28,19 @@ public class RestauranteController {
 	
 	@Autowired
 	private CadastroRestauranteService cadastroRestaurante;
-	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
+
 	@GetMapping
 	public List<Restaurante> listar(){
 		return cadastroRestaurante.listar();
 	}
-	
+
+	@GetMapping("/por-nome-e-frete")
+	public List<Restaurante> buscarPorNomeFrete(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+		return restauranteRepository.consultar(nome, taxaFreteInicial, taxaFreteFinal);
+	}
+
 	@GetMapping("/{restauranteId}")
 	public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId){
 		try {
