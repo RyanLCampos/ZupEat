@@ -2,7 +2,9 @@ package io.github.ryanlcampos.zupeat.domain.service;
 
 import java.util.Optional;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
@@ -20,9 +22,15 @@ public class CadastroEstadoService {
 	}
 
 	public void remover(Long id) {
-		Estado estadoEncontrado = obterPorId(id);
-		
-		estadoRepository.delete(estadoEncontrado);
+
+		try {
+			obterPorId(id);
+
+			estadoRepository.deleteById(id);
+
+		} catch (DataIntegrityViolationException e){
+			throw new EntidadeEmUsoException(String.format("Estado com codigo %d não pode ser removido, pois está em uso", id));
+		}
 	}
 	
 	public Estado obterPorId(Long id) {
