@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8ff9a609-93e7-4cb2-b909-5d52769dfa9c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/api/controller/CidadeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/domain/service/CadastroCidadeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.buildship.core/gradle/versions.json" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.buildship.core/gradle/versions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/4165235480.index" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/4165235480.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.m2e.logback/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.m2e.logback/0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/version.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/api/controller/CozinhaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/api/controller/CozinhaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/api/controller/RestauranteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/api/controller/RestauranteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/domain/repository/CozinhaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/domain/repository/CozinhaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/domain/service/CadastroCozinhaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/zupeat-api/src/main/java/io/github/ryanlcampos/zupeat/domain/service/CadastroCozinhaService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "RyanLCampos"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/RyanLCampos/ZupEat.git",
+    "accountId": "86091e34-ad6e-4fd0-bd3d-69f7412583d9"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="30eF9gKpiKO7bKNP2Ruq07QpSZU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/RYAN/Desktop/Curso Algaworks/Projeto/zupeat-api"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ff9a609-93e7-4cb2-b909-5d52769dfa9c" name="Changes" comment="" />
+      <created>1753979981761</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753979981761</updated>
+    </task>
+    <servers />
+  </component>
+</project>
