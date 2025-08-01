@@ -22,6 +22,8 @@ import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaExcep
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
 import io.github.ryanlcampos.zupeat.domain.service.CadastroRestauranteService;
 
+import static io.github.ryanlcampos.zupeat.infrastructure.repository.spec.RestauranteSpecs.*;
+
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
@@ -39,6 +41,11 @@ public class RestauranteController {
 	@GetMapping("/por-nome-e-frete")
 	public List<Restaurante> buscarPorNomeFrete(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
 		return restauranteRepository.consultar(nome, taxaFreteInicial, taxaFreteFinal);
+	}
+
+	@GetMapping("/com-frete-gratis")
+	public List<Restaurante> buscarPorFreteGratisNomeSemelhante(String nome) {
+		return restauranteRepository.findAll(comFreteGratis().and(comNomeSemelhante(nome)));
 	}
 
 	@GetMapping("/{restauranteId}")
