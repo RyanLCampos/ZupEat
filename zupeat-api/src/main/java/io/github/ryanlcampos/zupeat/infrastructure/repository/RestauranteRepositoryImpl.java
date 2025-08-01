@@ -5,11 +5,15 @@ import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepositoryQueri
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -23,32 +27,31 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
                                        BigDecimal taxaFreteInicial,
                                        BigDecimal taxaFreteFinal) {
 
-        var jpql = new StringBuilder();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
 
-        jpql.append("from Restaurante where 0 = 0 ");
+        CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
+        Root<Restaurante> root = criteria.from(Restaurante.class);
 
-        var parametros = new HashMap<String, Object>();
+        var predicates = new ArrayList<Predicate>();
 
-        if(StringUtils.hasLength(nome)) {
-            jpql.append("and nome like :nome ");
-            parametros.put("nome", "%" + nome + "%");
+        if(StringUtils.hasText(nome)) {
+            predicates.add(builder.like(root.get("nome"), "%" + nome + "%"));
         }
 
-        if(taxaFreteInicial != null) {
-            jpql.append("and taxaFrete >= :taxaFreteInicial ");
-            parametros.put("taxaFreteInicial", taxaFreteInicial);
+        if(taxaFreteInicial != null){
+            predicates.add(builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaFreteInicial));
         }
 
-        if(taxaFreteFinal != null) {
-            jpql.append("and taxaFrete <= :taxaFreteFinal ");
-            parametros.put("taxaFreteFinal", taxaFreteFinal);
+        if(taxaFreteFinal != null){
+            predicates.add(builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal));
         }
 
-        TypedQuery<Restaurante> query =  manager.createQuery(jpql.toString(), Restaurante.class);
 
-        parametros.forEach((chave, valor) -> query.setParameter(chave, valor));
+        criteria.where(predicates.toArray(new Predicate[0]));
 
+        TypedQuery<Restaurante> query = manager.createQuery(criteria);
         return query.getResultList();
     }
+
 
 }
