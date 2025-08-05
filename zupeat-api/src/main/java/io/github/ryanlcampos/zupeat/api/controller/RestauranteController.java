@@ -79,7 +79,8 @@ public class RestauranteController {
 			
 			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
 			
-			BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
+			BeanUtils.copyProperties(restaurante, restauranteAtual,
+					"id", "formasPagamento");
 			
 			cadastroRestaurante.salvar(restauranteAtual);
 			
