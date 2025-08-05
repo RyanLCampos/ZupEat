@@ -80,7 +80,7 @@ public class RestauranteController {
 			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
 			
 			BeanUtils.copyProperties(restaurante, restauranteAtual,
-					"id", "formasPagamento", "endereco");
+					"id", "formasPagamento", "endereco", "dataCadastro");
 			
 			cadastroRestaurante.salvar(restauranteAtual);
 			
