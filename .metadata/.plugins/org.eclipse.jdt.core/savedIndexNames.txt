@@ -58,7 +58,6 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 255381442.index
 3768696686.index
 872541602.index
-4165235480.index
 2833813919.index
 890337414.index
 3407582092.index
