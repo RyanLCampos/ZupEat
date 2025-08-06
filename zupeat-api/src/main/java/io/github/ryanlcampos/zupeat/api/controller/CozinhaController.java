@@ -22,6 +22,7 @@ import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaExcep
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.repository.CozinhaRepository;
 import io.github.ryanlcampos.zupeat.domain.service.CadastroCozinhaService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/cozinhas")
@@ -39,17 +40,8 @@ public class CozinhaController {
 	}
 
 	@GetMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> buscar(@PathVariable("cozinhaId") Long id) {
-		Optional<Cozinha> possivelCozinha = cozinhaRepository.findById(id);
-		
-		if(possivelCozinha.isEmpty()) {
-			
-			return ResponseEntity.notFound().build();
-		}
-		
-		Cozinha cozinhaEncontrada = possivelCozinha.get();
-		
-		return ResponseEntity.ok(cozinhaEncontrada);
+	public Cozinha buscar(@PathVariable("cozinhaId") Long id) {
+		return cadastroCozinha.buscarPorId(id);
 	}
 	
 	@PostMapping
@@ -59,38 +51,17 @@ public class CozinhaController {
 	}
 	
 	@PutMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
-		Optional<Cozinha> possivelCozinha = cozinhaRepository.findById(cozinhaId);
-		
-		if(possivelCozinha.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		Cozinha cozinhaAtual = possivelCozinha.get();
+	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
+		Cozinha cozinhaAtual = cadastroCozinha.buscarPorId(cozinhaId);
 		
 		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
 		
-		cadastroCozinha.salvar(cozinhaAtual);
-		
-		return ResponseEntity.ok(cozinhaAtual);
+		return cadastroCozinha.salvar(cozinhaAtual);
 	}
 	
 	@DeleteMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){	
-		try {
-			
-			cadastroCozinha.remover(cozinhaId);
-			
-			return ResponseEntity.noContent().build();
-			
-		}catch (EntidadeEmUsoException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-			
-		}catch(EntidadeNaoEncontradaException en) {
-			return ResponseEntity.notFound().build();
-		}
-		
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long cozinhaId){
+		cadastroCozinha.remover(cozinhaId);
 	}
-	
-	
 }
