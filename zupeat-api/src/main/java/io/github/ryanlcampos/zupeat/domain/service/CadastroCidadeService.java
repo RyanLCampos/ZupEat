@@ -25,9 +25,6 @@ public class CadastroCidadeService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public List<Cidade> listar(){
-        return cidadeRepository.findAll();
-    }
 
     public Cidade obterPorId(Long cidadeId){
         Optional<Cidade> possivelcidade = cidadeRepository.findById(cidadeId);
