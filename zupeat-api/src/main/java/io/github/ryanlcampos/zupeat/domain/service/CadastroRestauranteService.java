@@ -24,10 +24,6 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
 
-	public List<Restaurante> listar(){
-		return restauranteRepository.findAll();
-	}
-	
 	public Restaurante salvar(Restaurante restaurante) {
 		
 		Long cozinhaId = restaurante.getCozinha().getId();
@@ -50,8 +46,6 @@ public class CadastroRestauranteService {
 			
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(String.format("Restaurante com codigo %d não pode ser removido, pois está em uso", id));
-		} catch (EmptyResultDataAccessException er) {
-			throw new EntidadeNaoEncontradaException(String.format("Restaurante com código %d não foi encontrado", id));
 		}
 		
 	}
