@@ -38,54 +38,31 @@ public class EstadoController {
 	}
 	
 	@GetMapping("/{estadoId}")
-	public ResponseEntity<Estado> buscar(@PathVariable Long estadoId){
-		try {
-			
-			Estado estadoEncontrado = cadastroEstado.obterPorId(estadoId);
-			
-			return ResponseEntity.ok(estadoEncontrado);
-			
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.notFound().build();
-		}
+	public Estado buscar(@PathVariable Long estadoId){
+		return cadastroEstado.obterPorId(estadoId);
 	}
 	
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Estado adicionar(@RequestBody Estado estado){
 		return cadastroEstado.salvar(estado);
 	}
 	
 	@PutMapping("/{estadoId}")
-	public ResponseEntity<?> atualizar(@PathVariable Long estadoId, @RequestBody Estado estado){
-		try {
+	public Estado atualizar(@PathVariable Long estadoId, @RequestBody Estado estado){
 			
-			Estado estadoEncontrado = cadastroEstado.obterPorId(estadoId);
-			
-			BeanUtils.copyProperties(estado, estadoEncontrado, "id");
-			
-			cadastroEstado.salvar(estadoEncontrado);
-			
-			return ResponseEntity.ok(estadoEncontrado);
-			
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		Estado estadoEncontrado = cadastroEstado.obterPorId(estadoId);
+
+		BeanUtils.copyProperties(estado, estadoEncontrado, "id");
+
+		return cadastroEstado.salvar(estadoEncontrado);
+
 	}
 	
 	@DeleteMapping("/{estadoId}")
-	public ResponseEntity<?> remover(@PathVariable Long estadoId){
-		try {
-			
-			cadastroEstado.remover(estadoId);
-			
-			return ResponseEntity.noContent().build();
-			
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.notFound().build();
-		} catch (EntidadeEmUsoException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-		}
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long estadoId){
+		cadastroEstado.remover(estadoId);
 	} 
 	
 	
