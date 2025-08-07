@@ -34,13 +34,9 @@ public class CadastroEstadoService {
 	}
 	
 	public Estado obterPorId(Long id) {
-		Optional<Estado> possivelEstado = estadoRepository.findById(id);
-		
-		if(possivelEstado.isEmpty()) {
-			throw new EntidadeNaoEncontradaException(String.format("Estado de codigo %d não foi encontrado", id));
-		}
-		
-		return possivelEstado.get();
+		return estadoRepository.findById(id)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException(
+						String.format("Estado de codigo %d não foi encontrado", id)));
 	}
 	
 }

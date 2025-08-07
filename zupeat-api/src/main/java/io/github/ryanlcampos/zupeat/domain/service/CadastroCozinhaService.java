@@ -16,6 +16,7 @@ public class CadastroCozinhaService {
 
 	public static final String MSG_COZINHA_NAO_ENCONTRADA = "Cozinha de codigo %d não foi encontrada";
 	public static final String MSG_COZINHA_EM_USO = "Cozinha de codigo %d não pode ser removida, pois está em uso";
+
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
 	

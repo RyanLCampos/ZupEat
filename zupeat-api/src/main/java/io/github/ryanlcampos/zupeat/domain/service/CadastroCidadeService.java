@@ -25,27 +25,23 @@ public class CadastroCidadeService {
     @Autowired
     private EstadoRepository estadoRepository;
 
+    @Autowired
+    private CadastroEstadoService cadastroEstado;
+
 
     public Cidade obterPorId(Long cidadeId){
-        Optional<Cidade> possivelcidade = cidadeRepository.findById(cidadeId);
-
-        if(possivelcidade.isEmpty()){
-            throw new EntidadeNaoEncontradaException(String.format("Cidade de código %d não foi encontrado.", cidadeId));
-        }
-
-        return possivelcidade.get();
+        return cidadeRepository.findById(cidadeId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        String.format("Cidade de código %d não foi encontrado.", cidadeId)));
     }
 
 
     public Cidade salvar(Cidade cidade){
-
         Long estadoId = cidade.getEstado().getId();
 
-        Optional<Estado> possivelEstado = estadoRepository.findById(estadoId);
+        Estado estado = cadastroEstado.obterPorId(estadoId);
 
-        if(possivelEstado.isEmpty()){
-            throw new EntidadeNaoEncontradaException(String.format("Estado de codigo %d não foi encontrado", estadoId));
-        }
+        cidade.setEstado(estado);
 
         return cidadeRepository.save(cidade);
     }
