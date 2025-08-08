@@ -3,6 +3,7 @@ package io.github.ryanlcampos.zupeat.api.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,11 @@ public class RestauranteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Restaurante adicionar(@RequestBody Restaurante restaurante){
-		return cadastroRestaurante.salvar(restaurante);
+		try {
+			return cadastroRestaurante.salvar(restaurante);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 	
 	@PutMapping("/{restauranteId}")
@@ -59,8 +64,11 @@ public class RestauranteController {
 
 		BeanUtils.copyProperties(restaurante, restauranteAtual,
 				"id", "formasPagamento", "endereco", "dataCadastro", "produtos");
-
-		return cadastroRestaurante.salvar(restauranteAtual);
+		try {
+			return cadastroRestaurante.salvar(restauranteAtual);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 
 	}
 	
