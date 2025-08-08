@@ -1,8 +1,6 @@
 package io.github.ryanlcampos.zupeat.api.controller;
 
-
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.EstadoNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
 import io.github.ryanlcampos.zupeat.domain.repository.CidadeRepository;
@@ -10,7 +8,6 @@ import io.github.ryanlcampos.zupeat.domain.service.CadastroCidadeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +37,7 @@ public class CidadeController {
     public Cidade adicionar(@RequestBody Cidade cidade){
         try {
             return cadastroCidade.salvar(cidade);
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (EstadoNaoEncontradoException e) {
             throw new NegocioException(e.getMessage());
         }
     }
@@ -48,14 +45,13 @@ public class CidadeController {
     @PutMapping("/{cidadeId}")
     public Cidade atualizar(@PathVariable Long cidadeId,
                             @RequestBody Cidade cidade){
-
-        Cidade cidadeAtual = cadastroCidade.obterPorId(cidadeId);
-
-        BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-
         try {
+            Cidade cidadeAtual = cadastroCidade.obterPorId(cidadeId);
+
+            BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+
             return cadastroCidade.salvar(cidadeAtual);
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (EstadoNaoEncontradoException e) {
             throw new NegocioException(e.getMessage());
         }
     }

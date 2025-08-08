@@ -3,6 +3,7 @@ package io.github.ryanlcampos.zupeat.domain.service;
 import java.util.Optional;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.EstadoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,7 @@ public class CadastroEstadoService {
 	
 	public Estado obterPorId(Long id) {
 		return estadoRepository.findById(id)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(
-						String.format("Estado de codigo %d não foi encontrado", id)));
+				.orElseThrow(() -> new EstadoNaoEncontradoException(id));
 	}
 	
 }
