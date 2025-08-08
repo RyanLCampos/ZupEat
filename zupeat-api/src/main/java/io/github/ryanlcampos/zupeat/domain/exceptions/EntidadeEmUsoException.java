@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
-@ResponseStatus(value = HttpStatus.CONFLICT)
 public class EntidadeEmUsoException extends NegocioException{
 
 	@Serial

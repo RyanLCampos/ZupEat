@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class NegocioException extends RuntimeException {
 
 
