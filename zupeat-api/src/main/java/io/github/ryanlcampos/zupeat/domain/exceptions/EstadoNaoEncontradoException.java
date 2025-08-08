@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
-public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException{
+public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException {
 
 
 	@Serial
@@ -13,6 +13,10 @@ public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException
 
 	public EstadoNaoEncontradoException(String mensagem) {
 		super(mensagem);
+	}
+
+	public EstadoNaoEncontradoException(Long estadoId) {
+		this(String.format("Estado de codigo %d não foi encontrado", estadoId));
 	}
 
 }
