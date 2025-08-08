@@ -1,5 +1,7 @@
 package io.github.ryanlcampos.zupeat.api.controller;
 
+import io.github.ryanlcampos.zupeat.api.exceptionhandler.Problema;
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EstadoNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
@@ -8,8 +10,10 @@ import io.github.ryanlcampos.zupeat.domain.service.CadastroCidadeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -38,7 +42,7 @@ public class CidadeController {
         try {
             return cadastroCidade.salvar(cidade);
         } catch (EstadoNaoEncontradoException e) {
-            throw new NegocioException(e.getMessage());
+            throw new NegocioException(e.getMessage(), e);
         }
     }
 
@@ -52,7 +56,7 @@ public class CidadeController {
 
             return cadastroCidade.salvar(cidadeAtual);
         } catch (EstadoNaoEncontradoException e) {
-            throw new NegocioException(e.getMessage());
+            throw new NegocioException(e.getMessage(), e);
         }
     }
 

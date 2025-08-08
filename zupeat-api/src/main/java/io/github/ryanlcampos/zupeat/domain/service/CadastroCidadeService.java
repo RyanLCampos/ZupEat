@@ -47,10 +47,13 @@ public class CadastroCidadeService {
     }
 
     public void remover(Long cidadeId){
+        try {
+            obterPorId(cidadeId);
 
-        obterPorId(cidadeId);
-
-        cidadeRepository.deleteById(cidadeId);
+            cidadeRepository.deleteById(cidadeId);
+        } catch (DataIntegrityViolationException e) {
+            throw new EntidadeEmUsoException(String.format("Cidade com codigo %d não pode ser removido, pois está em uso", cidadeId));
+        }
 
     }
 
