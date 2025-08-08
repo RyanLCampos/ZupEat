@@ -15,8 +15,8 @@ public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException
 		super(mensagem);
 	}
 
-	public EstadoNaoEncontradoException(Long estadoId) {
-		this(String.format("Estado de codigo %d não foi encontrado", estadoId));
+	public EstadoNaoEncontradoException(Long id) {
+		this(String.format("Estado de codigo %d não foi encontrado", id));
 	}
 
 }
