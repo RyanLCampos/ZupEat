@@ -1,6 +1,7 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
@@ -31,8 +32,7 @@ public class CadastroCidadeService {
 
     public Cidade obterPorId(Long cidadeId){
         return cidadeRepository.findById(cidadeId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(
-                        String.format("Cidade de código %d não foi encontrado.", cidadeId)));
+                .orElseThrow(() -> new CidadeNaoEncontradoException(cidadeId));
     }
 
 

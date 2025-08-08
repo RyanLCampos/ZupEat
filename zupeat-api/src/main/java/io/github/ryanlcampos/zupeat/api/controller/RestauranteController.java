@@ -3,6 +3,7 @@ package io.github.ryanlcampos.zupeat.api.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import org.springframework.beans.BeanUtils;
@@ -52,21 +53,22 @@ public class RestauranteController {
 	public Restaurante adicionar(@RequestBody Restaurante restaurante){
 		try {
 			return cadastroRestaurante.salvar(restaurante);
-		} catch (EntidadeNaoEncontradaException e) {
+		} catch (CozinhaNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
 	
 	@PutMapping("/{restauranteId}")
 	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante){
-
-		Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
-
-		BeanUtils.copyProperties(restaurante, restauranteAtual,
-				"id", "formasPagamento", "endereco", "dataCadastro", "produtos");
 		try {
+
+			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
+
+			BeanUtils.copyProperties(restaurante, restauranteAtual,
+					"id", "formasPagamento", "endereco", "dataCadastro", "produtos");
+
 			return cadastroRestaurante.salvar(restauranteAtual);
-		} catch (EntidadeNaoEncontradaException e) {
+		} catch (CozinhaNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 

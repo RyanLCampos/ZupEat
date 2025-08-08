@@ -3,6 +3,7 @@ package io.github.ryanlcampos.zupeat.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.RestauranteNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -28,7 +29,7 @@ public class CadastroRestauranteService {
 		
 		Long cozinhaId = restaurante.getCozinha().getId();
 		
-		Cozinha cozinha = cadastroCozinha.buscarPorId(cozinhaId);
+		Cozinha cozinha = cadastroCozinha.obterPorId(cozinhaId);
 
 		restaurante.setCozinha(cozinha);
 		
@@ -50,8 +51,7 @@ public class CadastroRestauranteService {
 	
 	public Restaurante obterPorId(Long id) {
 		return restauranteRepository.findById(id)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(
-						String.format("Não existe restaurante com código %d", id)));
+				.orElseThrow(() -> new RestauranteNaoEncontradoException(id));
 	}
 	
 }
