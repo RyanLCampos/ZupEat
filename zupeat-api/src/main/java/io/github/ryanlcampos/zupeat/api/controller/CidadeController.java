@@ -3,9 +3,11 @@ package io.github.ryanlcampos.zupeat.api.controller;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
 import io.github.ryanlcampos.zupeat.domain.repository.CidadeRepository;
 import io.github.ryanlcampos.zupeat.domain.service.CadastroCidadeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +38,26 @@ public class CidadeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cidade adicionar(@RequestBody Cidade cidade){
-        return cadastroCidade.salvar(cidade);
+        try {
+            return cadastroCidade.salvar(cidade);
+        } catch (EntidadeNaoEncontradaException e) {
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @PutMapping("/{cidadeId}")
     public Cidade atualizar(@PathVariable Long cidadeId,
                             @RequestBody Cidade cidade){
-         return cadastroCidade.atualizar(cidadeId, cidade);
+
+        Cidade cidadeAtual = cadastroCidade.obterPorId(cidadeId);
+
+        BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+
+        try {
+            return cadastroCidade.salvar(cidadeAtual);
+        } catch (EntidadeNaoEncontradaException e) {
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{cidadeId}")

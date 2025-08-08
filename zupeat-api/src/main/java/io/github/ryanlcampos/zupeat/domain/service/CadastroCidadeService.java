@@ -46,17 +46,6 @@ public class CadastroCidadeService {
         return cidadeRepository.save(cidade);
     }
 
-    public Cidade atualizar(Long cidadeId, Cidade cidade){
-
-        Cidade cidadeAtual = obterPorId(cidadeId);
-
-        BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-
-        cidadeAtual = salvar(cidadeAtual);
-
-        return cidadeAtual;
-    }
-
     public void remover(Long cidadeId){
 
         obterPorId(cidadeId);
