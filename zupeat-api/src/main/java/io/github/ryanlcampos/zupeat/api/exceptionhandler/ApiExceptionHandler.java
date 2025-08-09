@@ -111,7 +111,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
         String detail = String.format("A propriedade '%s' é ignorada pela classe %s. " +
-                        "Remova-a do payload ou verifique a configuração do modelo.",
+                        "Remova-a do payload ou verifique a configuração da classe responsável.",
                 path, ex.getReferringClass().getSimpleName());
 
         Problem problem = createProblemBuilder((HttpStatus) status, problemType, detail).build();
