@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Builder
-@JsonPropertyOrder({"status", "timestamp", "title", "detail", "userMessage"})
+@JsonPropertyOrder({"status", "timestamp", "type", "title", "detail", "userMessage"})
 public class Problem {
 
     private Integer status;
