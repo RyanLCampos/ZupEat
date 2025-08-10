@@ -8,6 +8,7 @@ import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -123,11 +124,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<?> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex, WebRequest request) {
+    public ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
+                                                                   HttpHeaders headers,
+                                                                   HttpStatus status,
+                                                                   WebRequest request) {
 
-        HttpStatus status = HttpStatus.BAD_REQUEST;
         ProblemType problemType = ProblemType.PARAMETRO_INVALIDO;
+
         String detail = String.format("O parâmetro de URL '%s' recebeu o valor '%s', que é um tipo inválido." +
                 " Corrija e informe um valor compatível com o tipo %s.",
                 ex.getName(), ex.getValue(), Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
@@ -140,7 +143,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                         .userMessage(userMessage)
                         .build();
 
-        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
     @ExceptionHandler(Exception.class)
@@ -214,19 +217,34 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
+                                                        HttpStatusCode status, WebRequest request) {
+
+        if (ex instanceof MethodArgumentTypeMismatchException) {
+            return handleMethodArgumentTypeMismatch(
+                    (MethodArgumentTypeMismatchException) ex, headers, (HttpStatus) status, request);
+        }
+
+        return super.handleTypeMismatch(ex, headers, status, request);
+    }
+
+    @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
                                                              HttpStatusCode status, WebRequest request) {
+        HttpStatus httpStatus = (HttpStatus) status;
+
         if(body == null) {
             body = Problem.builder()
                     .timestamp(LocalDateTime.now())
-                    .title(status.toString())
-                    .status(status.value())
+                    .title(httpStatus.getReasonPhrase())
+                    .status(httpStatus.value())
+                    .userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
                     .build();
         } else if (body instanceof String) {
             body = Problem.builder()
                     .timestamp(LocalDateTime.now())
                     .title((String) body)
-                    .status(status.value())
+                    .status(httpStatus.value())
                     .userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
                     .build();
         }
