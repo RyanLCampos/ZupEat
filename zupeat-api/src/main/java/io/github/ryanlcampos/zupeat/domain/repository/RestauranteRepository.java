@@ -6,7 +6,6 @@ import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,

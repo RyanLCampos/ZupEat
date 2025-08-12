@@ -1,19 +1,13 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import io.github.ryanlcampos.zupeat.domain.exceptions.RestauranteNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
-import io.github.ryanlcampos.zupeat.domain.repository.CozinhaRepository;
 import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 
 @Service

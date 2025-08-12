@@ -1,7 +1,5 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
-import java.util.List;
-
 import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

@@ -3,28 +3,19 @@ package io.github.ryanlcampos.zupeat.domain.service;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import io.github.ryanlcampos.zupeat.domain.model.Estado;
 import io.github.ryanlcampos.zupeat.domain.repository.CidadeRepository;
-import io.github.ryanlcampos.zupeat.domain.repository.EstadoRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CadastroCidadeService {
 
     @Autowired
     private CidadeRepository cidadeRepository;
-
-    @Autowired
-    private EstadoRepository estadoRepository;
 
     @Autowired
     private CadastroEstadoService cadastroEstado;

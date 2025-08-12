@@ -1,14 +1,11 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
-import java.util.Optional;
-
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EstadoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Estado;
 import io.github.ryanlcampos.zupeat.domain.repository.EstadoRepository;
 

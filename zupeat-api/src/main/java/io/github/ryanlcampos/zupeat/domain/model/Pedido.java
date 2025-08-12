@@ -1,6 +1,5 @@
 package io.github.ryanlcampos.zupeat.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
