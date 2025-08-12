@@ -8,6 +8,7 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 1639852893.index
 3846432253.index
 890707357.index
+1256507628.index
 2424114487.index
 188277681.index
 3665906392.index
@@ -34,6 +35,7 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 2200595990.index
 2133456515.index
 3119072211.index
+3526181910.index
 601755464.index
 3650389935.index
 59275315.index
@@ -49,6 +51,7 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 2032029285.index
 1175941605.index
 3615318426.index
+1299859971.index
 1865797976.index
 4077002579.index
 2441548807.index
@@ -58,6 +61,7 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 255381442.index
 3768696686.index
 872541602.index
+4165235480.index
 2833813919.index
 890337414.index
 3407582092.index
@@ -72,11 +76,13 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 2020860234.index
 595605581.index
 168909963.index
+3951609927.index
 1467239121.index
 3853379764.index
 1350941417.index
 2128121465.index
 712119216.index
+2950009634.index
 1343934935.index
 818743441.index
 2227630830.index
@@ -92,3 +98,5 @@ INDEX VERSION 1.134+C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\.metadata\.plu
 4096922420.index
 3441273324.index
 3813216007.index
+1996628605.index
+1405267531.index
