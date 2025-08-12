@@ -1,4 +1,4 @@
-package io.github.ryanlcampos.zupeat;
+package io.github.ryanlcampos.zupeat.core.validation;
 
 public interface Groups {
 	
