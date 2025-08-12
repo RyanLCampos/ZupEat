@@ -7,7 +7,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.github.ryanlcampos.zupeat.Groups;
+import io.github.ryanlcampos.zupeat.core.validation.Groups;
+import io.github.ryanlcampos.zupeat.core.validation.ValorZeroIncluiDescricao;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -18,6 +19,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@ValorZeroIncluiDescricao(valorField = "taxaFrete",
+			descricaoField = "nome", descricaoObrigatoria = "Frete Grátis")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
