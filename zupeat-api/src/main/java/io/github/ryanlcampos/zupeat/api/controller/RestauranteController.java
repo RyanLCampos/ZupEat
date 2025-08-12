@@ -9,15 +9,11 @@ import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
 import io.github.ryanlcampos.zupeat.domain.service.CadastroRestauranteService;
-
-import static io.github.ryanlcampos.zupeat.infrastructure.repository.spec.RestauranteSpecs.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -50,7 +46,7 @@ public class RestauranteController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Restaurante adicionar(@RequestBody Restaurante restaurante){
+	public Restaurante adicionar(@RequestBody @Valid Restaurante restaurante){
 		try {
 			return cadastroRestaurante.salvar(restaurante);
 		} catch (CozinhaNaoEncontradoException e) {
@@ -59,7 +55,7 @@ public class RestauranteController {
 	}
 	
 	@PutMapping("/{restauranteId}")
-	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante){
+	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody @Valid Restaurante restaurante){
 		try {
 
 			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
