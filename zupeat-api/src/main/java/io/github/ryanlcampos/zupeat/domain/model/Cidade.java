@@ -1,6 +1,6 @@
 package io.github.ryanlcampos.zupeat.domain.model;
 
-import io.github.ryanlcampos.zupeat.Groups;
+import io.github.ryanlcampos.zupeat.core.validation.Groups;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
