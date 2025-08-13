@@ -1643,3 +1643,38 @@
 2025-08-12 13:05:48,986 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
 2025-08-12 13:07:39,088 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@1bb5cfbd{STOPPING}[12.0.12,sto=0]
 2025-08-12 13:07:39,111 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@6b9e9e51{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-13 12:24:02,704 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-13 12:24:06,457 [Worker-7: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - Cannot run program "\usr\bin\git" (in directory "\usr\bin"): CreateProcess error=2, O sistema não pode encontrar o arquivo especificado
+2025-08-13 12:28:55,953 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:28:56,002 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:28:56,022 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:33:18,261 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:33:18,271 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:33:18,281 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:33:58,165 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:33:58,173 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:33:58,183 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:35:29,944 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:35:29,953 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:35:29,963 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:35:48,293 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:35:48,297 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:35:48,306 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:36:34,776 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:36:34,789 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:36:34,803 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:37:24,549 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:37:24,563 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:37:24,575 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:37:35,290 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:37:35,299 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 8 resources from src\main\resources to target\classes
+2025-08-13 12:37:35,307 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:39:50,106 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-13 12:39:50,113 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:39:50,119 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:40:10,735 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-13 12:40:10,740 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:40:10,746 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
+2025-08-13 12:40:26,780 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-13 12:40:26,786 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-13 12:40:26,793 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\RYAN\Desktop\Curso Algaworks\Projeto\zupeat-api\src\test\resources
