@@ -1,16 +1,14 @@
 package io.github.ryanlcampos.zupeat;
 
-import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
-import io.github.ryanlcampos.zupeat.domain.service.CadastroCozinhaService;
-import jakarta.validation.ConstraintViolationException;
-import org.assertj.core.api.AssertionsForInterfaceTypes;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
+import io.github.ryanlcampos.zupeat.domain.service.CadastroCozinhaService;
+import jakarta.validation.ConstraintViolationException;
 
 @SpringBootTest
 class CadastroCozinhaIntegrationTests {
