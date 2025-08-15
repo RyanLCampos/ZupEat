@@ -1,12 +1,13 @@
 package io.github.ryanlcampos.zupeat.api.exceptionhandler;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Builder;
-import lombok.Getter;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import lombok.Builder;
+import lombok.Getter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter

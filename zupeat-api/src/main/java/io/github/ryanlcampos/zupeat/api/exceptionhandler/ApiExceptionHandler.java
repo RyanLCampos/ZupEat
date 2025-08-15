@@ -1,12 +1,10 @@
 package io.github.ryanlcampos.zupeat.api.exceptionhandler;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +25,14 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeNaoEncontradaException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
