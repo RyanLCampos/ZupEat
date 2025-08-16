@@ -14,7 +14,7 @@ import io.github.ryanlcampos.zupeat.domain.service.CadastroCozinhaService;
 import jakarta.validation.ConstraintViolationException;
 
 @SpringBootTest
-class CadastroCozinhaIntegrationTests {
+class CadastroCozinhaIT {
 
     @Autowired
     private CadastroCozinhaService cadastroCozinha;
