@@ -1,16 +1,20 @@
 package io.github.ryanlcampos.zupeat.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.ryanlcampos.zupeat.core.validation.Groups;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
@@ -28,7 +32,6 @@ public class Cozinha {
 	@Column(nullable = false)
 	private String nome;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "cozinha")
 	private List<Restaurante> restaurantes = new ArrayList<>();
 	
