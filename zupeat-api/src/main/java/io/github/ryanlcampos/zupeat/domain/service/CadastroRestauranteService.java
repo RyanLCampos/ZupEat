@@ -1,11 +1,12 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.RestauranteNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.RestauranteNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
 import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
@@ -19,6 +20,7 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CadastroCozinhaService cadastroCozinha;
 
+	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
 		
 		Long cozinhaId = restaurante.getCozinha().getId();
@@ -31,6 +33,7 @@ public class CadastroRestauranteService {
 		
 	}
 	
+	@Transactional
 	public void remover(Long id) {
 		try {
 			obterPorId(id);

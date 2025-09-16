@@ -1,10 +1,11 @@
 package io.github.ryanlcampos.zupeat.domain.service;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.repository.CozinhaRepository;
@@ -17,10 +18,12 @@ public class CadastroCozinhaService {
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
 	
+	@Transactional
 	public Cozinha salvar(Cozinha cozinha) {
 		return cozinhaRepository.save(cozinha);
 	}
 	
+	@Transactional
 	public void remover(Long id) {
 		try {
 
