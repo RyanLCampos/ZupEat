@@ -1,16 +1,13 @@
 package io.github.ryanlcampos.zupeat.api.model;
 
-import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class RestauranteModel {
+public class CidadeModel {
     
     private Long id;
     private String nome;
-    private BigDecimal taxaFrete;
-    private CozinhaModel cozinha;
+    private EstadoModel estado;
 }
