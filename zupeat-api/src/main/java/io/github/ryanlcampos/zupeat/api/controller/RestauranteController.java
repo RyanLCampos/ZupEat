@@ -2,16 +2,29 @@ package io.github.ryanlcampos.zupeat.api.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
-import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
-import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.github.ryanlcampos.zupeat.api.model.CozinhaModel;
+import io.github.ryanlcampos.zupeat.api.model.RestauranteModel;
+import io.github.ryanlcampos.zupeat.api.model.input.RestauranteInput;
+import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
+import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
+import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
 import io.github.ryanlcampos.zupeat.domain.service.CadastroRestauranteService;
 import jakarta.validation.Valid;
 
@@ -25,8 +38,8 @@ public class RestauranteController {
 	private RestauranteRepository restauranteRepository;
 
 	@GetMapping
-	public List<Restaurante> listar(){
-		return restauranteRepository.findAll();
+	public List<RestauranteModel> listar(){
+		return toCollectionModel(restauranteRepository.findAll());
 	}
 
 	@GetMapping("/por-nome-e-frete")
@@ -40,40 +53,81 @@ public class RestauranteController {
 	}
 
 	@GetMapping("/{restauranteId}")
-	public Restaurante buscar(@PathVariable Long restauranteId){
-		return cadastroRestaurante.obterPorId(restauranteId);
+	public RestauranteModel buscar(@PathVariable Long restauranteId){
+		Restaurante restaurante = cadastroRestaurante.obterPorId(restauranteId);
+
+		return toModel(restaurante);
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Restaurante adicionar(@RequestBody @Valid Restaurante restaurante){
+	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInput restauranteInput){
 		try {
-			return cadastroRestaurante.salvar(restaurante);
+			Restaurante restaurante = toDomainObject(restauranteInput);
+
+			return toModel(cadastroRestaurante.salvar(restaurante));
 		} catch (CozinhaNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
 	
 	@PutMapping("/{restauranteId}")
-	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody @Valid Restaurante restaurante){
+	public RestauranteModel atualizar(@PathVariable Long restauranteId, @RequestBody @Valid RestauranteInput restauranteInput){
 		try {
 
+			Restaurante restaurante = toDomainObject(restauranteInput);
+			
 			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
-
+			
 			BeanUtils.copyProperties(restaurante, restauranteAtual,
-					"id", "formasPagamento", "endereco", "dataCadastro", "produtos");
-
-			return cadastroRestaurante.salvar(restauranteAtual);
+			"id", "formasPagamento", "endereco", "dataCadastro", "produtos");
+			
+			return toModel(cadastroRestaurante.salvar(restauranteAtual));
 		} catch (CozinhaNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
-
 	}
 	
 	@DeleteMapping("/{restauranteId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long restauranteId){
 		cadastroRestaurante.remover(restauranteId);
+	}
+
+	private RestauranteModel toModel(Restaurante restaurante) {
+		CozinhaModel cozinhaModel = new CozinhaModel();
+
+		cozinhaModel.setId(restaurante.getCozinha().getId());
+		cozinhaModel.setNome(restaurante.getCozinha().getNome());
+
+		RestauranteModel restauranteModel = new RestauranteModel();
+
+		restauranteModel.setId(restaurante.getId());
+		restauranteModel.setNome(restaurante.getNome());
+		restauranteModel.setTaxaFrete(restaurante.getTaxaFrete());
+		restauranteModel.setCozinha(cozinhaModel);
+
+		return restauranteModel;
+	}
+
+	private List<RestauranteModel> toCollectionModel(List<Restaurante> restaurantes) {
+		return restaurantes.stream()
+		.map(restaurante -> toModel(restaurante))
+		.collect(Collectors.toList());
+	}
+
+	private Restaurante toDomainObject(RestauranteInput restauranteInput) {
+		Restaurante restaurante = new Restaurante();
+
+		restaurante.setNome(restauranteInput.getNome());
+		restaurante.setTaxaFrete(restauranteInput.getTaxaFrete());
+
+		Cozinha cozinha = new Cozinha();
+		cozinha.setId(restauranteInput.getCozinha().getId());
+
+		restaurante.setCozinha(cozinha);
+
+		return restaurante;
 	}
 	
 }

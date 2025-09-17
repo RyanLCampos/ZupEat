@@ -8,7 +8,6 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import io.github.ryanlcampos.zupeat.core.validation.Groups;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -21,12 +20,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.groups.ConvertGroup;
-import jakarta.validation.groups.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,18 +34,18 @@ public class Restaurante {
 	@Id
 	private Long id;
 
-	@NotBlank
+	// @NotBlank
 	@Column(nullable = false)
 	private String nome;
 
-	@PositiveOrZero
-	@NotNull
+	// @PositiveOrZero
+	// @NotNull
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
-	@Valid
-	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
-	@NotNull
+	// @Valid
+	// @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
+	// @NotNull
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Cozinha cozinha;
