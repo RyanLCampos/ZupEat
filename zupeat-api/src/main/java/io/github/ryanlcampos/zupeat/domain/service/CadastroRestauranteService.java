@@ -39,6 +39,8 @@ public class CadastroRestauranteService {
 			obterPorId(id);
 			
 			restauranteRepository.deleteById(id);
+
+			restauranteRepository.flush();
 			
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(String.format("Restaurante com codigo %d não pode ser removido, pois está em uso", id));

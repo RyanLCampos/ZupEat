@@ -44,6 +44,8 @@ public class CadastroCidadeService {
             obterPorId(cidadeId);
 
             cidadeRepository.deleteById(cidadeId);
+
+            cidadeRepository.flush();
         } catch (DataIntegrityViolationException e) {
             throw new EntidadeEmUsoException(String.format("Cidade com codigo %d não pode ser removido, pois está em uso", cidadeId));
         }

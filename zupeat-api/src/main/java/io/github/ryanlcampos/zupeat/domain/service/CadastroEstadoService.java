@@ -29,6 +29,8 @@ public class CadastroEstadoService {
 
 			estadoRepository.deleteById(id);
 
+			estadoRepository.flush();
+
 		} catch (DataIntegrityViolationException e){
 			throw new EntidadeEmUsoException(String.format("Estado com codigo %d não pode ser removido, pois está em uso", id));
 		}
