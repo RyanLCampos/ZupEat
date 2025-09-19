@@ -19,6 +19,7 @@ import io.github.ryanlcampos.zupeat.api.assembler.RestauranteInputDisassembler;
 import io.github.ryanlcampos.zupeat.api.assembler.RestauranteModelAssembler;
 import io.github.ryanlcampos.zupeat.api.model.RestauranteModel;
 import io.github.ryanlcampos.zupeat.api.model.input.RestauranteInput;
+import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.CozinhaNaoEncontradoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.NegocioException;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
@@ -71,7 +72,7 @@ public class RestauranteController {
 			Restaurante restaurante = restauranteInputDisassembler.toDomainObject(restauranteInput);
 
 			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restaurante));
-		} catch (CozinhaNaoEncontradoException e) {
+		} catch (CozinhaNaoEncontradoException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
@@ -90,7 +91,7 @@ public class RestauranteController {
 			// "id", "formasPagamento", "endereco", "dataCadastro", "produtos");
 			
 			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restauranteAtual));
-		} catch (CozinhaNaoEncontradoException e) {
+		} catch (CozinhaNaoEncontradoException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}

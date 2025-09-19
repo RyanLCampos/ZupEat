@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradoException;
+import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradaException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.model.Cidade;
 import io.github.ryanlcampos.zupeat.domain.model.Estado;
@@ -24,7 +24,7 @@ public class CadastroCidadeService {
 
     public Cidade obterPorId(Long cidadeId){
         return cidadeRepository.findById(cidadeId)
-                .orElseThrow(() -> new CidadeNaoEncontradoException(cidadeId));
+                .orElseThrow(() -> new CidadeNaoEncontradaException(cidadeId));
     }
 
     @Transactional

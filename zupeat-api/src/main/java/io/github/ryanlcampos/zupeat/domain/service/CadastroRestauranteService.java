@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.ryanlcampos.zupeat.domain.exceptions.EntidadeEmUsoException;
 import io.github.ryanlcampos.zupeat.domain.exceptions.RestauranteNaoEncontradoException;
+import io.github.ryanlcampos.zupeat.domain.model.Cidade;
 import io.github.ryanlcampos.zupeat.domain.model.Cozinha;
 import io.github.ryanlcampos.zupeat.domain.model.Restaurante;
 import io.github.ryanlcampos.zupeat.domain.repository.RestauranteRepository;
@@ -20,6 +21,9 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CadastroCozinhaService cadastroCozinha;
 
+	@Autowired
+	private CadastroCidadeService cadastroCidade;
+
 	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
 		
@@ -28,6 +32,12 @@ public class CadastroRestauranteService {
 		Cozinha cozinha = cadastroCozinha.obterPorId(cozinhaId);
 
 		restaurante.setCozinha(cozinha);
+
+		Long cidadeId = restaurante.getEndereco().getCidade().getId();
+
+		Cidade cidade = cadastroCidade.obterPorId(cidadeId);
+
+		restaurante.getEndereco().setCidade(cidade);
 		
 		return restauranteRepository.save(restaurante);
 		
