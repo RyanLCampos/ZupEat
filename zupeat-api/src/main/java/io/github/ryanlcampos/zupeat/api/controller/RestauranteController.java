@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.ryanlcampos.zupeat.api.assembler.RestauranteInputDisassembler;
-import io.github.ryanlcampos.zupeat.api.assembler.RestauranteModelAssembler;
+import io.github.ryanlcampos.zupeat.api.assembler.RestauranteMapper;
 import io.github.ryanlcampos.zupeat.api.model.RestauranteModel;
 import io.github.ryanlcampos.zupeat.api.model.input.RestauranteInput;
 import io.github.ryanlcampos.zupeat.domain.exceptions.CidadeNaoEncontradaException;
@@ -38,14 +37,11 @@ public class RestauranteController {
 	private RestauranteRepository restauranteRepository;
 
 	@Autowired
-	private RestauranteModelAssembler restauranteModelAssembler;
-
-	@Autowired
-	private RestauranteInputDisassembler restauranteInputDisassembler;
+	private RestauranteMapper restauranteMapper;
 
 	@GetMapping
 	public List<RestauranteModel> listar(){
-		return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
+		return restauranteMapper.toCollectionModel(restauranteRepository.findAll());
 	}
 
 	@GetMapping("/por-nome-e-frete")
@@ -62,16 +58,16 @@ public class RestauranteController {
 	public RestauranteModel buscar(@PathVariable Long restauranteId){
 		Restaurante restaurante = cadastroRestaurante.obterPorId(restauranteId);
 
-		return restauranteModelAssembler.toModel(restaurante);
+		return restauranteMapper.toModel(restaurante);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInput restauranteInput){
 		try {
-			Restaurante restaurante = restauranteInputDisassembler.toDomainObject(restauranteInput);
+			Restaurante restaurante = restauranteMapper.toDomainObject(restauranteInput);
 
-			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restaurante));
+			return restauranteMapper.toModel(cadastroRestaurante.salvar(restaurante));
 		} catch (CozinhaNaoEncontradoException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
@@ -82,9 +78,9 @@ public class RestauranteController {
 		try {
 			Restaurante restauranteAtual = cadastroRestaurante.obterPorId(restauranteId);
 
-			restauranteInputDisassembler.copyToDomainObject(restauranteInput, restauranteAtual);
+			restauranteMapper.copyToDomainObject(restauranteInput, restauranteAtual);
 			
-			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restauranteAtual));
+			return restauranteMapper.toModel(cadastroRestaurante.salvar(restauranteAtual));
 		} catch (CozinhaNaoEncontradoException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}

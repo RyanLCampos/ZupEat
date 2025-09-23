@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.ryanlcampos.zupeat.api.assembler.EstadoInputDisassembler;
-import io.github.ryanlcampos.zupeat.api.assembler.EstadoModelAssembler;
+import io.github.ryanlcampos.zupeat.api.assembler.EstadoMapper;
 import io.github.ryanlcampos.zupeat.api.model.EstadoModel;
 import io.github.ryanlcampos.zupeat.api.model.input.EstadoInput;
 import io.github.ryanlcampos.zupeat.domain.model.Estado;
@@ -34,28 +33,25 @@ public class EstadoController {
 	private EstadoRepository estadoRepository;
 
 	@Autowired
-	private EstadoModelAssembler estadoModelAssembler;
-
-	@Autowired
-	private EstadoInputDisassembler estadoInputDisassembler;
+	private EstadoMapper estadoMapper;
 	
 	@GetMapping
 	public List<EstadoModel> listar(){
-		return estadoModelAssembler.toCollectionModel(estadoRepository.findAll());
+		return estadoMapper.toCollectionModel(estadoRepository.findAll());
 	}
 	
 	@GetMapping("/{estadoId}")
 	public EstadoModel buscar(@PathVariable Long estadoId){
-		return estadoModelAssembler.toModel(cadastroEstado.obterPorId(estadoId));
+		return estadoMapper.toModel(cadastroEstado.obterPorId(estadoId));
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public EstadoModel adicionar(@RequestBody @Valid EstadoInput estadoInput){
 
-		Estado estado = estadoInputDisassembler.toDomainObject(estadoInput);
+		Estado estado = estadoMapper.toDomainObject(estadoInput);
 
-		return estadoModelAssembler.toModel(cadastroEstado.salvar(estado));
+		return estadoMapper.toModel(cadastroEstado.salvar(estado));
 	}
 	
 	@PutMapping("/{estadoId}")
@@ -63,9 +59,9 @@ public class EstadoController {
 			
 		Estado estadoEncontrado = cadastroEstado.obterPorId(estadoId);
 
-		estadoInputDisassembler.copyToDomainObject(estadoInput, estadoEncontrado);
+		estadoMapper.copyToDomainObject(estadoInput, estadoEncontrado);
 
-		return estadoModelAssembler.toModel(cadastroEstado.salvar(estadoEncontrado));
+		return estadoMapper.toModel(cadastroEstado.salvar(estadoEncontrado));
 
 	}
 	

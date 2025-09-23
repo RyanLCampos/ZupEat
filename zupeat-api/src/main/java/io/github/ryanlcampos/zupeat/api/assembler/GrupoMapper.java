@@ -1,17 +1,35 @@
 package io.github.ryanlcampos.zupeat.api.assembler;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import io.github.ryanlcampos.zupeat.api.model.GrupoModel;
 import io.github.ryanlcampos.zupeat.api.model.input.GrupoInput;
 import io.github.ryanlcampos.zupeat.domain.model.Grupo;
 
 @Component
-public class GrupoInputDisassembler {
-    
+public class GrupoMapper {
+
     @Autowired
     private ModelMapper modelMapper;
+
+    // DOMAIN -> DTO
+
+    public GrupoModel toModel(Grupo grupo) {
+        return modelMapper.map(grupo, GrupoModel.class);
+    }
+
+    public List<GrupoModel> toCollectionModel(List<Grupo> grupos) {
+        return grupos.stream()
+                .map(grupo -> toModel(grupo))
+                .collect(Collectors.toList());
+    }
+
+    // DTO -> DOMAIN
 
     public Grupo toDomainObject(GrupoInput grupoInput) {
         return modelMapper.map(grupoInput, Grupo.class);
@@ -20,4 +38,5 @@ public class GrupoInputDisassembler {
     public void copyToDomainObject(GrupoInput grupoInput, Grupo grupo) {
         modelMapper.map(grupoInput, grupo);
     }
+
 }

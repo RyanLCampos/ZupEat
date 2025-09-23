@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.ryanlcampos.zupeat.api.assembler.GrupoInputDisassembler;
-import io.github.ryanlcampos.zupeat.api.assembler.GrupoModelAssembler;
+import io.github.ryanlcampos.zupeat.api.assembler.GrupoMapper;
 import io.github.ryanlcampos.zupeat.api.model.GrupoModel;
 import io.github.ryanlcampos.zupeat.api.model.input.GrupoInput;
 import io.github.ryanlcampos.zupeat.domain.model.Grupo;
@@ -34,33 +33,30 @@ public class GrupoController {
     private CadastroGrupoService cadastroGrupo;
 
     @Autowired
-    private GrupoModelAssembler grupoModelAssembler;
-
-    @Autowired
-    private GrupoInputDisassembler grupoInputDisassembler;
+    private GrupoMapper grupoMapper;
 
     @GetMapping
     public List<GrupoModel> listar() {
         List<Grupo> grupos = grupoRepository.findAll();
 
-        return grupoModelAssembler.toCollectionModel(grupos);
+        return grupoMapper.toCollectionModel(grupos);
     }
 
     @GetMapping("/{grupoId}")
     public GrupoModel buscar(@PathVariable Long grupoId) {
         Grupo grupo = cadastroGrupo.obterPorId(grupoId);
 
-        return grupoModelAssembler.toModel(grupo);
+        return grupoMapper.toModel(grupo);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public GrupoModel adicionar(@RequestBody @Valid GrupoInput grupoInput) {
-        Grupo grupo = grupoInputDisassembler.toDomainObject(grupoInput);
+        Grupo grupo = grupoMapper.toDomainObject(grupoInput);
 
         grupo = cadastroGrupo.salvar(grupo);
 
-        return grupoModelAssembler.toModel(grupo);
+        return grupoMapper.toModel(grupo);
     }
 
     @PutMapping("/{grupoId}")
@@ -69,11 +65,11 @@ public class GrupoController {
         
         Grupo grupoAtual = cadastroGrupo.obterPorId(grupoId);
 
-        grupoInputDisassembler.copyToDomainObject(grupoInput, grupoAtual);
+        grupoMapper.copyToDomainObject(grupoInput, grupoAtual);
 
         grupoAtual = cadastroGrupo.salvar(grupoAtual);
 
-        return grupoModelAssembler.toModel(grupoAtual);
+        return grupoMapper.toModel(grupoAtual);
     }
 
     @DeleteMapping("/{grupoId}")

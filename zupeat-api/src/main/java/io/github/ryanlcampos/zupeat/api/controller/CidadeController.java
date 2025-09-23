@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.ryanlcampos.zupeat.api.assembler.CidadeInputDisassembler;
-import io.github.ryanlcampos.zupeat.api.assembler.CidadeModelAssembler;
+import io.github.ryanlcampos.zupeat.api.assembler.CidadeMapper;
 import io.github.ryanlcampos.zupeat.api.model.CidadeModel;
 import io.github.ryanlcampos.zupeat.api.model.input.CidadeInput;
 import io.github.ryanlcampos.zupeat.domain.exceptions.EstadoNaoEncontradoException;
@@ -36,19 +35,16 @@ public class CidadeController {
     private CidadeRepository cidadeRepository;
 
     @Autowired
-    private CidadeModelAssembler cidadeModelAssembler;
-
-    @Autowired
-    private CidadeInputDisassembler cidadeInputDisassembler;
+    private CidadeMapper cidadeMapper;
 
     @GetMapping
     public List<CidadeModel> listar(){
-        return cidadeModelAssembler.toCollectionModel(cidadeRepository.findAll());
+        return cidadeMapper.toCollectionModel(cidadeRepository.findAll());
     }
 
     @GetMapping("/{cidadeId}")
     public CidadeModel buscar(@PathVariable Long cidadeId){
-        return cidadeModelAssembler.toModel(cadastroCidade.obterPorId(cidadeId));
+        return cidadeMapper.toModel(cadastroCidade.obterPorId(cidadeId));
     }
 
     @PostMapping
@@ -56,9 +52,9 @@ public class CidadeController {
     public CidadeModel adicionar(@RequestBody @Valid CidadeInput cidadeInput){
         try {
 
-            Cidade cidade = cidadeInputDisassembler.toDomainObject(cidadeInput);
+            Cidade cidade = cidadeMapper.toDomainObject(cidadeInput);
 
-            return cidadeModelAssembler.toModel(cadastroCidade.salvar(cidade));
+            return cidadeMapper.toModel(cadastroCidade.salvar(cidade));
         } catch (EstadoNaoEncontradoException e) {
             throw new NegocioException(e.getMessage(), e);
         }
@@ -70,9 +66,9 @@ public class CidadeController {
         try {
             Cidade cidadeAtual = cadastroCidade.obterPorId(cidadeId);
             
-            cidadeInputDisassembler.copyToDomainObject(cidadeInput, cidadeAtual);
+            cidadeMapper.copyToDomainObject(cidadeInput, cidadeAtual);
 
-            return cidadeModelAssembler.toModel(cadastroCidade.salvar(cidadeAtual));
+            return cidadeMapper.toModel(cadastroCidade.salvar(cidadeAtual));
         } catch (EstadoNaoEncontradoException e) {
             throw new NegocioException(e.getMessage(), e);
         }

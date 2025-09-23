@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.ryanlcampos.zupeat.api.assembler.FormaPagamentoInputDisassembler;
-import io.github.ryanlcampos.zupeat.api.assembler.FormaPagamentoModelAssembler;
+import io.github.ryanlcampos.zupeat.api.assembler.FormaPagamentoMapper;
 import io.github.ryanlcampos.zupeat.api.model.FormaPagamentoModel;
 import io.github.ryanlcampos.zupeat.api.model.input.FormaPagamentoInput;
 import io.github.ryanlcampos.zupeat.domain.model.FormaPagamento;
@@ -34,33 +33,30 @@ public class FormaPagamentoController {
     private CadastroFormaPagamentoService cadastroFormaPagamento;
 
     @Autowired
-    private FormaPagamentoModelAssembler formaPagamentoModelAssembler;
-
-    @Autowired
-    private FormaPagamentoInputDisassembler formaPagamentoInputDisassembler;
+    private FormaPagamentoMapper formaPagamentoMapper;
 
     @GetMapping
     public List<FormaPagamentoModel> listar() {
         List<FormaPagamento> todasFormasPagamentos = formaPagamentoRepository.findAll();
 
-        return formaPagamentoModelAssembler.toCollectionModel(todasFormasPagamentos);
+        return formaPagamentoMapper.toCollectionModel(todasFormasPagamentos);
     }
 
     @GetMapping("/{formaPagamentoId}")
     public FormaPagamentoModel buscar(@PathVariable Long formaPagamentoId) {
         FormaPagamento formaPagamento = cadastroFormaPagamento.obterPorId(formaPagamentoId);
 
-        return formaPagamentoModelAssembler.toModel(formaPagamento);
+        return formaPagamentoMapper.toModel(formaPagamento);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
-        FormaPagamento formaPagamento = formaPagamentoInputDisassembler.toDomainObject(formaPagamentoInput);
+        FormaPagamento formaPagamento = formaPagamentoMapper.toDomainObject(formaPagamentoInput);
 
         formaPagamento = cadastroFormaPagamento.salvar(formaPagamento);
 
-        return formaPagamentoModelAssembler.toModel(formaPagamento);
+        return formaPagamentoMapper.toModel(formaPagamento);
     }
 
     @PutMapping("/{formaPagamentoId}")
@@ -68,11 +64,11 @@ public class FormaPagamentoController {
             @RequestBody @Valid FormaPagamentoInput formaPagamentoInput){
         FormaPagamento formaPagamentoAtual = cadastroFormaPagamento.obterPorId(formaPagamentoId);
 
-        formaPagamentoInputDisassembler.copyToDomainObject(formaPagamentoInput, formaPagamentoAtual);
+        formaPagamentoMapper.copyToDomainObject(formaPagamentoInput, formaPagamentoAtual);
         
         formaPagamentoAtual = cadastroFormaPagamento.salvar(formaPagamentoAtual);
 
-        return formaPagamentoModelAssembler.toModel(formaPagamentoAtual);
+        return formaPagamentoMapper.toModel(formaPagamentoAtual);
     }
 
     @DeleteMapping("/{formaPagamentoId}")
