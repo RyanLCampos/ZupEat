@@ -38,5 +38,4 @@ public class UsuarioMapper {
     public void copyToDomainObject(UsuarioInput usuarioInput, Usuario usuario) {
         modelMapper.map(usuarioInput, usuario);
     }
-
 }

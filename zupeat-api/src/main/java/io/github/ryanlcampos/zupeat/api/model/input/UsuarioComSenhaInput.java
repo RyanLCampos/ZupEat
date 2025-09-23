@@ -1,18 +1,14 @@
 package io.github.ryanlcampos.zupeat.api.model.input;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioInput {
-
+public class UsuarioComSenhaInput extends UsuarioInput{
+    
     @NotBlank
-    private String nome;
+    private String senha;
 
-    @Email
-    @NotBlank
-    private String email;
 }
