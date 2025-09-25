@@ -75,6 +75,6 @@ public class GrupoController {
     @DeleteMapping("/{grupoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long grupoId){
-        cadastroGrupo.excluir(grupoId);
+        cadastroGrupo.remover(grupoId);
     }
 }

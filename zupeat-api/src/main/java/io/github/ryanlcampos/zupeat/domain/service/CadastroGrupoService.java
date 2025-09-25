@@ -25,7 +25,7 @@ public class CadastroGrupoService {
     }
 
     @Transactional
-    public void excluir(Long grupoId) {
+    public void remover(Long grupoId) {
         try {
             grupoRepository.deleteById(grupoId);
             grupoRepository.flush();

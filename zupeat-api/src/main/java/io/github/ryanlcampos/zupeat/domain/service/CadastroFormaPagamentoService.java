@@ -25,7 +25,7 @@ public class CadastroFormaPagamentoService {
         return formaPagamentoRepository.save(formaPagamento);
     }
 
-    public void excluir(Long formaPagamentoId) {
+    public void remover(Long formaPagamentoId) {
         try {
             formaPagamentoRepository.deleteById(formaPagamentoId);
             formaPagamentoRepository.flush();

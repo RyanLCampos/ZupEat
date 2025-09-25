@@ -74,7 +74,7 @@ public class FormaPagamentoController {
     @DeleteMapping("/{formaPagamentoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long formaPagamentoId) {
-        cadastroFormaPagamento.excluir(formaPagamentoId);
+        cadastroFormaPagamento.remover(formaPagamentoId);
     }
 
 }
