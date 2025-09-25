@@ -50,8 +50,10 @@ public class RestauranteProdutoController {
     @GetMapping("/{produtoId}")
     public ProdutoModel buscar(@PathVariable Long restauranteId,
             @PathVariable Long produtoId) {
+        
+        Restaurante restaurante = cadastroRestaurante.obterPorId(restauranteId);
 
-        Produto produto = cadastroProduto.obterPorId(produtoId, restauranteId);
+        Produto produto = cadastroProduto.obterPorId(produtoId, restaurante.getId());
 
         return mapper.toModel(produto);
     }
@@ -74,7 +76,10 @@ public class RestauranteProdutoController {
     @PutMapping("/{produtoId}")
     public ProdutoModel atualizar(@PathVariable Long restauranteId, @PathVariable Long produtoId,
             @RequestBody @Valid ProdutoInput produtoInput) {
-        Produto produtoAtual = cadastroProduto.obterPorId(produtoId, restauranteId);
+
+        Restaurante restaurante = cadastroRestaurante.obterPorId(restauranteId);
+
+        Produto produtoAtual = cadastroProduto.obterPorId(produtoId, restaurante.getId());
 
         mapper.copyToDomainObject(produtoInput, produtoAtual);
 
