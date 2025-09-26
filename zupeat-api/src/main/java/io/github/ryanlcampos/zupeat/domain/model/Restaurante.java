@@ -30,55 +30,65 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table
 public class Restaurante {
-	
-	@EqualsAndHashCode.Include
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	private Long id;
 
-	@Column(nullable = false)
-	private String nome;
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Long id;
 
-	@Column(name = "taxa_frete", nullable = false)
-	private BigDecimal taxaFrete;
-	
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Cozinha cozinha;
+    @Column(nullable = false)
+    private String nome;
 
-	@Embedded
-	private Endereco endereco;
+    @Column(name = "taxa_frete", nullable = false)
+    private BigDecimal taxaFrete;
 
-	private Boolean ativo = Boolean.TRUE;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Cozinha cozinha;
 
-	@CreationTimestamp
-	@Column(nullable = false, columnDefinition = "datetime")
-	private OffsetDateTime dataCadastro;
+    @Embedded
+    private Endereco endereco;
 
-	@UpdateTimestamp
-	@Column(nullable = false, columnDefinition = "datetime")
-	private OffsetDateTime dataAtualizacao;
+    private Boolean ativo = Boolean.TRUE;
 
-	@ManyToMany
-	@JoinTable(name = "restaurante_forma_pagamento",
-			joinColumns = @JoinColumn(name = "restaurante_id"),
-			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-	private Set<FormaPagamento> formasPagamento = new HashSet<>();
+    private Boolean aberto = Boolean.TRUE;
 
-	@OneToMany(mappedBy = "restaurante")
-	private List<Produto> produtos = new ArrayList<>();
-	
-	public void ativar() {
-		setAtivo(true);
-	}
+    @CreationTimestamp
+    @Column(nullable = false, columnDefinition = "datetime")
+    private OffsetDateTime dataCadastro;
 
-	public void inativar() {
-		setAtivo(false);
-	}
+    @UpdateTimestamp
+    @Column(nullable = false, columnDefinition = "datetime")
+    private OffsetDateTime dataAtualizacao;
 
-	public boolean removerFormaPagamento(FormaPagamento formaPagamento) {
-		return getFormasPagamento().remove(formaPagamento);
-	}
+    @ManyToMany
+    @JoinTable(name = "restaurante_forma_pagamento",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+    private Set<FormaPagamento> formasPagamento = new HashSet<>();
+
+    @OneToMany(mappedBy = "restaurante")
+    private List<Produto> produtos = new ArrayList<>();
+
+    public void ativar() {
+        setAtivo(true);
+    }
+
+    public void inativar() {
+        setAtivo(false);
+    }
+
+    public void abrir() {
+		setAberto(true);
+    }
+
+    public void fechar() {
+		setAberto(false);
+    }
+
+    public boolean removerFormaPagamento(FormaPagamento formaPagamento) {
+        return getFormasPagamento().remove(formaPagamento);
+    }
 
     public boolean adicionarFormaPagamento(FormaPagamento formaPagamento) {
         return getFormasPagamento().add(formaPagamento);

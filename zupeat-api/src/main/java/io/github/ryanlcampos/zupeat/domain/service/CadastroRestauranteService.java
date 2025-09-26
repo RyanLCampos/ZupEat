@@ -98,10 +98,26 @@ public class CadastroRestauranteService {
 		restauranteAtual.inativar();
 	}
 
+	@Transactional
+	public void abrir(Long restauranteId){
+		Restaurante restauranteAtual = obterPorId(restauranteId);
+
+		restauranteAtual.abrir();
+	}
+
+	@Transactional
+	public void fechar(Long restauranteId){
+		Restaurante restauranteAtual = obterPorId(restauranteId);
+
+		restauranteAtual.fechar();
+	}
+
+
 	public Restaurante obterPorId(Long id) {
 		return restauranteRepository.findById(id)
 				.orElseThrow(() -> new RestauranteNaoEncontradoException(id));
 	}
+
 
 	
 }
